@@ -1,7 +1,7 @@
 <template>
-  <main>
-    Основа
-  </main>
+  <div>
+    Основная страница
+  </div>
 </template>
 
 <script>

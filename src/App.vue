@@ -1,30 +1,44 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <Header></Header>
-  <Main></Main>
-  <Footer></Footer>
+  <Header @click="goToPage('Main')"></Header>
+  <button @click="goToPage('Recipe')">Recipe</button>
+  <button @click="goToPage('CreateRecipe')">CreateRecipe</button>
+  <component :is="currentTabComponent"></component>
 </template>
 
 <script>
-import Header from './components/Header.vue'
-import Main from './components/Main.vue'
-import Footer from './components/Footer.vue'
+import Header from './components/components/Header.vue'
+import Main from './components/Pages/Main.vue'
+import Recipe from "./components/Pages/Recipe";
+import CreateRecipe from "./components/Pages/CreateRecipe";
+
 
 export default {
   name: 'App',
+  data() {
+    return {
+      currentTabComponent: 'Main',
+    }
+  },
   components: {
     Header,
     Main,
-    Footer
+    Recipe,
+    CreateRecipe
+  },
+  methods: {
+    goToPage(pageName) {
+      this.currentTabComponent = pageName;
+    }
   }
 }
 </script>
 
 <style>
+.logo {
+  width: 20%;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
