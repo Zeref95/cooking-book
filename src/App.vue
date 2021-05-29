@@ -1,8 +1,18 @@
 <template>
-  <Header @click="goToPage('Main')"></Header>
-  <button @click="goToPage('Recipe')">Recipe</button>
-  <button @click="goToPage('CreateRecipe')">CreateRecipe</button>
-  <component :is="currentTabComponent"></component>
+  <div id="app">
+    <header @click="goToPage('Main')">
+      <Header></Header>
+    </header>
+
+    <button class="btn btn-info" @click="goToPage('Recipe')">
+      Конкретный рецепт
+    </button>
+    <button class="btn btn-secondary mx-1" @click="goToPage('CreateRecipe')">
+      Создать новый рецепт
+    </button>
+    <hr>
+    <component :is="currentTabComponent"></component>
+  </div>
 </template>
 
 <script>
@@ -34,13 +44,13 @@ export default {
 </script>
 
 <style>
-.logo {
-  width: 20%;
-}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+header {
+  cursor: pointer;
 }
 </style>
