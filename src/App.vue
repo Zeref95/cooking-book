@@ -4,14 +4,20 @@
       <Header></Header>
     </header>
 
-    <button class="btn btn-info" @click="goToPage('Recipe')">
-      Конкретный рецепт
+    <button class="btn btn-info" @click="goToPage('Main')">
+      Книга рецептов
     </button>
     <button class="btn btn-secondary mx-1" @click="goToPage('CreateRecipe')">
       Создать новый рецепт
     </button>
     <hr>
-    <component :is="currentTabComponent"></component>
+    <component
+        :recipes="recipes"
+        @addRecipe="addRecipe"
+        @goToCurrentRecipe="goToCurrentRecipe"
+        :currentRecipe="currentRecipe"
+        :is="currentTabComponent"
+    ></component>
   </div>
 </template>
 
@@ -27,6 +33,8 @@ export default {
   data() {
     return {
       currentTabComponent: 'Main',
+      currentRecipe: 1,
+      recipes: []
     }
   },
   components: {
@@ -38,6 +46,13 @@ export default {
   methods: {
     goToPage(pageName) {
       this.currentTabComponent = pageName;
+    },
+    addRecipe(newRecipe) {
+      this.recipes.push(newRecipe)
+    },
+    goToCurrentRecipe(recipeId) {
+      this.currentRecipe = recipeId.recipeId;
+      this.currentTabComponent = 'Recipe'
     }
   }
 }
@@ -50,6 +65,7 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
 header {
   cursor: pointer;
 }

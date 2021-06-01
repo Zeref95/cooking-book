@@ -1,14 +1,27 @@
 <template>
   <div>
-    <h1>Название рецепта</h1>
-    <p><b>Краткое описание рецепта</b></p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est incidunt modi perferendis vel! Esse eum fugit illo nobis perferendis quaerat tempore. Aliquam modi odit veniam vero. Cupiditate optio pariatur voluptatibus!</p>
+    <h1>{{ recipe.title }}</h1>
+    <p><b>{{ recipe.description }}</b></p>
+    <p>{{ recipe.content }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Recipe"
+  name: "Recipe",
+  props: ['recipes', 'currentRecipe'],
+  data() {
+    return {
+      recipe: {
+        title: '',
+        description: '',
+        content: '',
+      }
+    }
+  },
+  mounted() {
+    this.recipe = this.recipes.find(recipe => recipe.id === this.currentRecipe)
+  }
 }
 </script>
 
