@@ -29,6 +29,7 @@
 <script>
 export default {
   name: "CreateRecipe",
+  props: ['recipes'],
   data() {
     return {
       title: '',
@@ -45,11 +46,17 @@ export default {
       this.status.success = false;
       this.status.failed = false;
       if (this.title && this.content && this.description) {
-        this.$emit('addRecipe', {
+        let newRecipe = {
           title: this.title,
           description: this.description,
           content: this.content,
+        }
+        this.axios.post('http://cooking-backend', newRecipe).then((response) => {
+          this.$emit('addRecipe', response.data.recipeList);
+        }) .catch(e => {
+          console.log(e)
         })
+
         this.title = '';
         this.description = '';
         this.content = '';

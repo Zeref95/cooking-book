@@ -37,10 +37,15 @@ export default {
       search: '',
     }
   },
+
   watch: {
     search: function () {
       this.goSearch();
     },
+    recipes: function () {
+      this.showingRecipes = this.recipes;
+      this.goSearch();
+    }
   },
   mounted() {
     this.goSearch();
@@ -59,7 +64,7 @@ export default {
         this.showingRecipes = recipes;
       }
       this.showingRecipes.splice(20)
-
+      this.showingRecipes.reverse();
     },
   }
 }

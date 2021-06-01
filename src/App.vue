@@ -43,9 +43,9 @@ export default {
     Recipe,
     CreateRecipe
   },
-  mounted() {
-    this.axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then((response) => {
-      console.log(response.data)
+  beforeCreate() {
+    this.axios.get('http://cooking-backend').then((response) => {
+      this.recipes = response.data?.recipeList;
     })
   },
   methods: {
