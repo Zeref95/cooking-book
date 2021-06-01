@@ -43,6 +43,11 @@ export default {
     Recipe,
     CreateRecipe
   },
+  mounted() {
+    this.axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then((response) => {
+      console.log(response.data)
+    })
+  },
   methods: {
     goToPage(pageName) {
       this.currentTabComponent = pageName;
