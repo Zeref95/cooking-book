@@ -44,7 +44,7 @@ export default {
     CreateRecipe
   },
   beforeCreate() {
-    this.axios.get('http://cooking-backend').then((response) => {
+    this.axios.get('https://niderman.ru/backend/index.php').then((response) => {
       this.recipes = response.data?.recipeList;
     })
   },

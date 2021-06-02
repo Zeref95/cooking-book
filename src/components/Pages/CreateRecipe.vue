@@ -21,7 +21,7 @@
       Рецепт успешно создан, Вы можете добавить еще один рецепт, или вернуться на главную страницу.
     </div>
     <div class="alert alert-danger mt-1" v-if="status.failed" role="alert">
-      Не все поля были успешно заполнены.
+      Не все поля были успешно заполнены либо рецепт с таким названием уже существует.
     </div>
   </div>
 </template>
@@ -51,16 +51,21 @@ export default {
           description: this.description,
           content: this.content,
         }
-        this.axios.post('http://cooking-backend', newRecipe).then((response) => {
-          this.$emit('addRecipe', response.data.recipeList);
+        this.axios.post('https://niderman.ru/backend/index.php', newRecipe).then((response) => {
+          if (response.data.status === 'success') {
+            this.$emit('addRecipe', response.data.recipeList);
+            this.title = '';
+            this.description = '';
+            this.content = '';
+            this.status.success = true;
+          } else {
+            this.status.failed = true;
+          }
+
         }) .catch(e => {
           console.log(e)
         })
 
-        this.title = '';
-        this.description = '';
-        this.content = '';
-        this.status.success = true;
       } else {
         this.status.failed = true;
       }
