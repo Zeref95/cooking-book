@@ -51,7 +51,7 @@ export default {
           description: this.description,
           content: this.content,
         }
-        this.axios.post('https://niderman.ru/backend/index.php', newRecipe).then((response) => {
+        this.axios.post('http://ec2-3-131-38-199.us-east-2.compute.amazonaws.com/api/', newRecipe).then((response) => {
           if (response.data.status === 'success') {
             this.$emit('addRecipe', response.data.recipeList);
             this.title = '';

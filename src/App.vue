@@ -44,7 +44,7 @@ export default {
     CreateRecipe
   },
   beforeCreate() {
-    this.axios.get('https://niderman.ru/backend/index.php').then((response) => {
+    this.axios.get('http://ec2-3-131-38-199.us-east-2.compute.amazonaws.com/api/').then((response) => {
       this.recipes = response.data?.recipeList;
     })
   },
